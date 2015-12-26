@@ -1,0 +1,42 @@
+{% extends "social/base.html" %}
+
+{% block content %}
+<span class='info'>&#8658; You must be logged in to view this page.</span>
+<br>
+<br>
+<div class='main'>
+    {% if loggedin  %}
+        You are now logged in.
+        Please <a href='/social/members/?view={{ username }}'>click here</a> to continue.
+        <br><br>
+	{% elif loggedin != None  %}
+	    <h3>Please enter your details to login</h3>
+        <p><i>Incorrect username or password</i></p>
+        <form method='POST' action='/social/login/'>
+        	{% csrf_token %}
+            <span class='fieldname'>Username</span>
+            <input type='text' maxlength='16' name='username' onBlur='checkUser(this)'>
+            <span id='info'></span>
+            <br>
+            <span class='fieldname'>Password</span>
+            <input type='text' maxlength='16' name='password'><br>
+            <span class='fieldname'>&nbsp;</span>
+            <input type='submit' value='Login'>
+        </form>
+	
+	{% else %}
+        <h3>Please enter your details to login</h3>
+        <form method='POST' action='/social/login/'>
+        	{% csrf_token %}
+            <span class='fieldname'>Username</span>
+            <input type='text' maxlength='16' name='username' onBlur='checkUser(this)'>
+            <span id='info'></span>
+            <br>
+            <span class='fieldname'>Password</span>
+            <input type='text' maxlength='16' name='password'><br>
+            <span class='fieldname'>&nbsp;</span>
+            <input type='submit' value='Login'>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "social/base.html" %}
+
+{% block content %}
+{% if loggedin  %}
+<div class='main'>
+<h3>{{ greeting }} Profile</h3>
+{% if profile %}
+{{ profile }} <br style='clear:left;'><br>
+{% endif %}
+<a class='button' href='/social/messages/?view={{ greeting }}'>View {{ greeting }} messages</a>
+<br>
+<br>
+</div>
+{% else %}
+		<span class='info'>&#8658; You must be logged in to view this page.</span>
+		<br>
+		<br>
+{% endif %}
+{% endblock %}

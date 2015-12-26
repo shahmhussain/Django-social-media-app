@@ -1,0 +1,7 @@
+activate social-network
+
+python manage.py makemigrations
+
+python manage.py runserver
+
+http://localhost:8000/social/

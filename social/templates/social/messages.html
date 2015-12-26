@@ -1,0 +1,38 @@
+{% extends "social/base.html" %}
+
+{% block content %}
+
+{% if loggedin  %}
+<div class='main'>
+<h3>{{ greeting }} Messages </h3>
+<form method="POST" >
+<p>Type here to leave a message: </p>
+{%csrf_token %}
+<textarea name="message" cols="40" rows="3"></textarea><br>
+<input type="radio" name="messageGroup" value="False"checked>Public
+<input type="radio" name="messageGroup" value="True">  Private
+<input type="submit" name="submit" value="Post Message">
+<br>
+</form>
+</div>
+
+    {% for message in storedMessages %}
+	<p>{{ message.time}} <a href="?view={{ message.user }}%27s"> {{ message.user}}</a>
+	        {% if message.isPrivatemessage == True %}
+                <i>Whispered</i>:
+            {% else %}
+                <i>Wrote</i>:
+            {% endif %}"{{ message.message }}"
+				<a href="?remove={{ message.id }}">{{delete}}</a></p>
+
+
+
+    {% endfor %}
+
+{% else %}
+		<span class='info'>&#8658; You must be logged in to view this page.</span>
+		<br>
+		<br>
+{% endif %}
+
+{% endblock %}
